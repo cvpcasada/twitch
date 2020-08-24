@@ -1,51 +1,49 @@
 {
-  "name": "twitch-pubsub-client",
-  "version": "4.2.0-pre.7",
-  "description": "Listen to events using the Twitch PubSub interface.",
-  "keywords": [
-    "twitch",
-    "pubsub",
-    "stream",
-    "events"
-  ],
-  "sideEffects": false,
-  "main": "lib",
-  "types": "lib",
-  "module": "es",
-  "exports": {
-    ".": {
-      "require": "./lib/index.js",
-      "import": "./es/index.mjs"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/d-fischer/twitch.git",
-    "directory": "packages/twitch-pubsub-client"
-  },
-  "homepage": "https://d-fischer.github.io/twitch-pubsub-client",
-  "author": "Daniel Fischer <daniel@d-fischer.dev>",
-  "license": "MIT",
-  "dependencies": {
-    "@d-fischer/connection": "^6.0.2",
-    "@d-fischer/logger": "^2.0.0",
-    "@d-fischer/shared-utils": "^2.3.1",
-    "@d-fischer/typed-event-emitter": "^3.0.0"
-  },
-  "devDependencies": {
-    "twitch": "^4.2.0-pre.7"
-  },
-  "peerDependencies": {
-    "twitch": "^4.1.0"
-  },
-  "files": [
-    "LICENSE",
-    "README.md",
-    "lib",
-    "es"
-  ],
-  "scripts": {
-    "build": "tsukuru",
-    "rebuild": "tsukuru --clean"
-  }
+	"name": "@cyca/twitch-pubsub-client",
+	"version": "4.2.0-micro-pre.7-1",
+	"description": "Listen to events using the Twitch PubSub interface.",
+	"keywords": [
+		"twitch",
+		"pubsub",
+		"stream",
+		"events"
+	],
+	"sideEffects": false,
+	"source": "src/index.ts",
+	"main": "lib/twitch-pubsub-client.js",
+	"types": "lib/index.d.ts",
+	"module": "lib/twitch-pubsub-client.modern.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/d-fischer/twitch.git",
+		"directory": "packages/twitch-pubsub-client"
+	},
+	"homepage": "https://d-fischer.github.io/twitch-pubsub-client",
+	"author": "Daniel Fischer <daniel@d-fischer.dev>",
+	"license": "MIT",
+	"dependencies": {
+		"@d-fischer/connection": "^6.0.2",
+		"@d-fischer/logger": "^2.0.0",
+		"@d-fischer/shared-utils": "^2.3.1",
+		"@d-fischer/typed-event-emitter": "^3.0.0"
+	},
+	"devDependencies": {
+		"twitch": "^4.2.0-pre.7",
+		"twitch-auth": "^4.2.0-pre.7",
+		"microbundle": "^0.12.3"
+	},
+	"peerDependencies": {
+		"twitch": "^4.1.0",
+		"twitch-auth": "^4.2.0-pre.6"
+	},
+	"files": [
+		"LICENSE",
+		"README.md",
+		"lib",
+		"es"
+	],
+	"scripts": {
+		"build": "microbundle build -f modern,cjs --no-compress",
+		"rebuild": "rimraf lib && yarn build"
+	}
 }

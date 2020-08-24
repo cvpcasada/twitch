@@ -103,14 +103,18 @@ export class BasicPubSubClient extends EventEmitter {
 		);
 
 		this._connection.onConnect(async () => {
-			this._logger.info('Connection established');
-			await this._resendListens();
-			if (this._topics.size) {
-				this._logger.info('Listened to previously registered topics');
-				this._logger.debug(`Previously registered topics: ${Array.from(this._topics.keys()).join(', ')}`);
+			try {
+				this._logger.info('Connection established');
+				await this._resendListens();
+				if (this._topics.size) {
+					this._logger.info('Listened to previously registered topics');
+					this._logger.debug(`Previously registered topics: ${Array.from(this._topics.keys()).join(', ')}`);
+				}
+				this._startPingCheckTimer();
+				this.emit(this.onConnect);
+			} catch (error) {
+				this.emit(this.onDisconnect, false, error);
 			}
-			this._startPingCheckTimer();
-			this.emit(this.onConnect);
 		});
 
 		this._connection.onReceive((line: string) => {
